@@ -1,0 +1,4 @@
+fc78c1a95d0e2356c9b9fcafe1e1d4a6f7949bcb0b200b465e90ddcf14acb6d0  Moye-Setup-0.5.1-x64.exe
+a06b4926df0fc6bed283d349525b8c4da10c1d10ebfb57adf21fa2add19deaf7  Moye-Setup-0.5.1-x64.exe.blockmap
+e572d658e6358a5a5a06b8fb918a26336cba50325db1fb6ffee06c9b76814fed  Moye-Portable-0.5.1-x64.exe
+12a913ad6200df4211fe63d5512997b733358bf53df92b9d7adbf3a2a4e092cb  latest.yml
