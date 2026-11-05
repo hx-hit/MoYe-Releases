@@ -1,18 +1,8 @@
 import { readFile, stat } from 'node:fs/promises'
 import { createHash } from 'node:crypto'
+import { validateMetadata, verifyWindowsManifest } from './release-assets.mjs'
 const metadata = JSON.parse(await readFile('release.json', 'utf8'))
-if (!/^\d+\.\d+\.\d+$/.test(metadata.version)) throw new Error('Invalid release version')
-const expected = [
-  `Moye-Setup-${metadata.version}-x64.exe`,
-  `Moye-Setup-${metadata.version}-x64.exe.blockmap`,
-  `Moye-Portable-${metadata.version}-x64.exe`,
-  'SHA256SUMS.txt',
-  'latest.yml',
-]
-if (
-  JSON.stringify(metadata.assets.map((a) => a.name).sort()) !== JSON.stringify([...expected].sort())
-)
-  throw new Error('Invalid release assets')
+const expected = validateMetadata(metadata)
 for (const asset of metadata.assets) {
   const data = await readFile(`packages/${asset.name}`)
   if (
@@ -22,11 +12,11 @@ for (const asset of metadata.assets) {
     throw new Error('Asset verification failed')
 }
 const manifest = await readFile('packages/latest.yml', 'utf8')
-if (
-  !manifest.startsWith(`version: ${metadata.version}\n`) &&
-  !manifest.startsWith(`version: ${metadata.version}\r\n`)
+verifyWindowsManifest(
+  manifest,
+  metadata.version,
+  await readFile(`packages/Moye-Setup-${metadata.version}-x64.exe`),
 )
-  throw new Error('Manifest version mismatch')
 const base = 'https://api.github.com/repos/hx-hit/MoYe-Releases'
 const headers = {
   Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
@@ -41,6 +31,8 @@ async function api(url, options = {}) {
 const releases = await api(`${base}/releases?per_page=100`)
 let release = releases.find((r) => r.tag_name === `v${metadata.version}`)
 if (release && !release.draft) {
+  if (!expected.every((name) => release.assets.some((a) => a.name === name)))
+    throw new Error('Published release is incomplete; use a new version')
   console.log(`Already published ${release.html_url}`)
   process.exit(0)
 }
@@ -71,8 +63,21 @@ for (const name of expected) {
     body: await readFile(`packages/${name}`),
   })
 }
+const compare = (a, b) => {
+  const x = a.split('.').map(Number),
+    y = b.split('.').map(Number)
+  for (let i = 0; i < 3; i++) if (x[i] !== y[i]) return x[i] - y[i]
+  return 0
+}
+const newerPublished = releases.some(
+  (r) =>
+    !r.draft &&
+    !r.prerelease &&
+    /^v\d+\.\d+\.\d+$/.test(r.tag_name) &&
+    compare(r.tag_name.slice(1), metadata.version) > 0,
+)
 await api(`${base}/releases/${release.id}`, {
   method: 'PATCH',
-  ...json({ draft: false, make_latest: 'true' }),
+  ...json({ draft: false, make_latest: newerPublished ? 'false' : 'true' }),
 })
 console.log(`Published ${release.html_url}`)

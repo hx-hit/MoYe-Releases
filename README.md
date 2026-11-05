@@ -2,10 +2,13 @@
 
 免费、轻量、离线优先的 Markdown、源码和配置文件阅读与编辑器。作者：**HXi**。
 
-从 [Releases](https://github.com/hx-hit/MoYe-Releases/releases/latest) 下载 Windows x64 安装包。
+从 [Releases](https://github.com/hx-hit/MoYe-Releases/releases/latest) 下载 Windows、Linux 与 macOS 安装包。
 
 - **Moye-Setup**：安装版，支持软件内检查、下载和安装更新。
 - **Moye-Portable**：免安装版，下载新版后手动替换。
+- **linux-x64 / linux-arm64**：Debian/Ubuntu 安装包，以及依赖系统 GTK3、WebKitGTK 4.1、glibc >= 2.35 的 tar.gz 程序包。
+- **macos-x64 / macos-arm64**：Intel 与 Apple Silicon 的 DMG（最低 macOS 11）；当前未进行 Apple 开发者签名和公证。
+- Linux/macOS 可检查更新并打开对应架构的安装包，下载后手动安装。
 - **SHA256SUMS.txt**：附件校验；`latest.yml` 和 `.blockmap` 用于更新。
 
 安装包约 3.5 MB，使用 Windows 共享 WebView2 组件。支持 Markdown、C/C++、Python、JS、TS、Vue、Rust 与常见配置文本；文件拖入、标签右键管理、拖拽排序、查找替换、深浅主题。

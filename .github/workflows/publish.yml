@@ -7,7 +7,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: public-release
+  group: public-release-${{ github.sha }}
   cancel-in-progress: false
 jobs:
   publish:
