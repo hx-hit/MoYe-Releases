@@ -1,31 +1,62 @@
 {
-  "version": "0.5.1",
-  "body": "- 更新源迁移到公开仓库 hx-hit/MoYe-Releases，用户无需 GitHub 登录或访问令牌即可检查和下载更新。\n- 源码仓库继续私有，公开仓库仅分发安装包、更新清单和发布说明。\n- 配置自动发布通道；私有构建通过限定到公开仓库的发布密钥推送安装包，公开仓库自动生成 Release。\n- 旧版首次切换请手动安装此版本，之后继续使用应用内检查更新。\n\n### 下载与更新\n\n- **Moye-Setup**：Windows 安装版，支持应用内更新。\n- **Moye-Portable**：免安装版，新版本需要手动替换。\n- 首次从 0.1.x / 0.2.x 迁移到轻量版，请先保存未保存的草稿，再手动安装 Setup 版本。\n- 更新来自公开的 MoYe-Releases 仓库，无需登录或配置访问令牌。旧版本首次切换请手动安装 0.5.1 或更新版本。\n- latest.yml / blockmap 用于更新校验，SHA256SUMS.txt 用于手动校验。\n",
+  "schemaVersion": 2,
+  "version": "0.6.3",
+  "body": "- 汇总本轮保存、退出、草稿恢复、更新校验及编辑性能审计修复，提供 Windows x64、Linux x64/ARM64、macOS Intel/Apple Silicon 安装包。\n- 另存为前阻止覆盖其他已打开标签的文件，选回原路径仍检查外部修改。\n- Unix 对无法用 UTF-8 表示的文件路径安全拒绝或跳过，避免文件夹浏览导致程序崩溃。\n- Windows 原子保存保留所有者、用户组和 DACL，无法完整保留时停止覆盖；拒绝原位覆盖 EFS 加密文件，避免保存后变为明文。\n- 修复 macOS 打包后应用目录被清理导致启动验证失败的问题；每个平台通过原生测试与启动检查后统一发布。\n- 按 Linux 与 macOS 文件系统能力分别验证异常文件名，保留两平台输入边界保护，避免测试依赖不适用的文件系统假设。\n- 仍在跟进 Linux GTK/GLib 上游依赖缺陷及维护告警；macOS 包暂未进行 Apple 签名和公证。\n\n### 下载与更新\n\n- **Moye-Setup**：Windows 安装版，支持应用内更新。\n- **Moye-Portable**：Windows 免安装版。\n- **linux-x64 / linux-arm64**：Debian/Ubuntu 安装包与需要系统 GTK/WebKit 的 tar.gz 程序包。\n- **macos-x64 / macos-arm64**：Intel 与 Apple Silicon 的 DMG。\n- Linux/macOS 可以在软件中检查并打开当前平台下载，使用系统安装器手动更新。\n- macOS 包未进行 Apple 开发者签名与公证，首次打开可能需要在系统隐私与安全性中允许。\n- 首次从 0.1.x / 0.2.x 迁移到轻量版，请先保存未保存的草稿，再手动安装 Setup 版本。\n- 更新来自公开的 MoYe-Releases 仓库，无需登录或配置访问令牌。旧版本首次切换请手动安装 0.5.1 或更新版本。\n- latest.yml / blockmap 用于更新校验，SHA256SUMS.txt 用于手动校验。\n",
   "assets": [
     {
-      "name": "Moye-Setup-0.5.1-x64.exe",
-      "size": 3681692,
-      "sha256": "fc78c1a95d0e2356c9b9fcafe1e1d4a6f7949bcb0b200b465e90ddcf14acb6d0"
+      "name": "Moye-Setup-0.6.3-x64.exe",
+      "size": 3691810,
+      "sha256": "ad098570b9ea44ce3d4e5611e420463023072aa3efd990ef9d743a9a5f1d9228"
     },
     {
-      "name": "Moye-Setup-0.5.1-x64.exe.blockmap",
-      "size": 4144,
-      "sha256": "a06b4926df0fc6bed283d349525b8c4da10c1d10ebfb57adf21fa2add19deaf7"
+      "name": "Moye-Setup-0.6.3-x64.exe.blockmap",
+      "size": 4267,
+      "sha256": "827bb38584e67d6063667c903b32961e969c1681a92e8d4f04c2cfb1bc9a4824"
     },
     {
-      "name": "Moye-Portable-0.5.1-x64.exe",
-      "size": 3298350,
-      "sha256": "e572d658e6358a5a5a06b8fb918a26336cba50325db1fb6ffee06c9b76814fed"
+      "name": "Moye-Portable-0.6.3-x64.exe",
+      "size": 3308360,
+      "sha256": "c89abdbf2b20726ae3cd9fe60ef4e3f0d0aee2032c24b27bb1ff9893c1f252a5"
+    },
+    {
+      "name": "Moye-0.6.3-linux-x64.deb",
+      "size": 4181762,
+      "sha256": "b7977aa2c862a8fd4515396431ac5282a2629131a33db83489b93db30d900152"
+    },
+    {
+      "name": "Moye-0.6.3-linux-x64.tar.gz",
+      "size": 4069789,
+      "sha256": "303252432d7a144dfc2cd3ce9e4d2aff0e2da698ffb4735b7fc2a0823cd1a5b8"
+    },
+    {
+      "name": "Moye-0.6.3-macos-x64.dmg",
+      "size": 4066750,
+      "sha256": "7ef360ec7d6ac310222e8c5160c4aca2d2238e153e38e044829627dc36e5e0e2"
+    },
+    {
+      "name": "Moye-0.6.3-linux-arm64.deb",
+      "size": 4034316,
+      "sha256": "0568abbd5237fa21d002ddc5b1f687388465c098d8b156fa7e9a427488045f01"
+    },
+    {
+      "name": "Moye-0.6.3-linux-arm64.tar.gz",
+      "size": 3899660,
+      "sha256": "557a52afe2c9dce10a1defa4b38edf58c726ba931cfe299f5c4b1c8b12b2abdc"
+    },
+    {
+      "name": "Moye-0.6.3-macos-arm64.dmg",
+      "size": 3871666,
+      "sha256": "a2630a45124d7f975ec19c747bc7193a607e6a0e119fe558f9f2d39fab832bac"
     },
     {
       "name": "SHA256SUMS.txt",
-      "size": 362,
-      "sha256": "ba9ba81e08127f5b2691c1f0ca18953f76ec9076597c69faccccffcb64881ffa"
+      "size": 920,
+      "sha256": "939d0aa69a0340f9cec366321a8d1bdd4bee60720376f010282d04e63ecd28c0"
     },
     {
       "name": "latest.yml",
       "size": 343,
-      "sha256": "12a913ad6200df4211fe63d5512997b733358bf53df92b9d7adbf3a2a4e092cb"
+      "sha256": "870b0e90732d3587cd4f37581e5b71f54d6235b0a64b9080e8b3e0d695bf7ac2"
     }
   ]
 }

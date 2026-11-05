@@ -1,8 +1,8 @@
-version: 0.5.1
+version: 0.6.3
 files:
-  - url: Moye-Setup-0.5.1-x64.exe
-    sha512: 9l5YW4dYLdTBD8rpeODc2+PqeoO6HBQFhwgFkr9ZCF/mNDZlLLiMbe06oWKBJGvi4B5uKwEyx/48HKu0/lRQMQ==
-    size: 3681692
-path: Moye-Setup-0.5.1-x64.exe
-sha512: 9l5YW4dYLdTBD8rpeODc2+PqeoO6HBQFhwgFkr9ZCF/mNDZlLLiMbe06oWKBJGvi4B5uKwEyx/48HKu0/lRQMQ==
-releaseDate: '2026-11-05T02:24:17.312Z'
+  - url: Moye-Setup-0.6.3-x64.exe
+    sha512: ZhVYR1zC5zHjYU3n2sJuVqHdAh8MMWeyD/pjvjdt0if8MjPEXqrFjXdg86BbDc+SVL2mabZHIhk4vj0SOjxO1w==
+    size: 3691810
+path: Moye-Setup-0.6.3-x64.exe
+sha512: ZhVYR1zC5zHjYU3n2sJuVqHdAh8MMWeyD/pjvjdt0if8MjPEXqrFjXdg86BbDc+SVL2mabZHIhk4vj0SOjxO1w==
+releaseDate: '2026-11-05T16:47:51.045Z'
